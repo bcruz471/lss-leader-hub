@@ -1,50 +1,62 @@
 
 import React from 'react';
-import { Progress } from "@/components/ui/progress";
-
-interface CompetencyData {
-  name: string;
-  percentage: number;
-  color: string;
-}
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { CompetencyData } from '@/types';
 
 interface CompetencyAssessmentProps {
-  competencies: CompetencyData[];
   overallProgress: number;
+  competencies: {
+    name: string;
+    percentage: number;
+    color: string;
+  }[];
 }
 
-export const CompetencyAssessment: React.FC<CompetencyAssessmentProps> = ({ 
+const CompetencyAssessment = ({ 
   competencies, 
   overallProgress 
-}) => {
+}: CompetencyAssessmentProps) => {
+  const getProgressColorClass = (color: string) => {
+    switch(color) {
+      case 'lss-blue': return 'bg-lss-blue';
+      case 'lss-teal': return 'bg-lss-teal';
+      case 'lss-orange': return 'bg-lss-orange';
+      case 'lss-purple': return 'bg-lss-purple';
+      default: return 'bg-primary';
+    }
+  };
+
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm animate-fade-in">
-      <h2 className="text-2xl font-bold mb-6">Competency Assessment</h2>
-      
-      <div className="space-y-6">
-        <div>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-xl">Competency Assessment</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="mb-4">
           <div className="flex justify-between mb-2">
-            <span className="text-gray-700 font-medium">Overall Progress</span>
-            <span className="font-bold">{overallProgress}%</span>
+            <span className="text-sm font-medium">Overall Progress</span>
+            <span className="text-sm font-medium">{overallProgress}%</span>
           </div>
-          <Progress value={overallProgress} className="h-2 bg-gray-200" indicatorClassName="bg-lss-teal" />
+          <Progress value={overallProgress} className="h-3 bg-gray-200" />
         </div>
-        
-        {competencies.map((competency) => (
-          <div key={competency.name}>
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-700 font-medium">{competency.name}</span>
-              <span className="font-bold">{competency.percentage}%</span>
+
+        <div className="space-y-3">
+          {competencies.map((competency, i) => (
+            <div key={i} className="space-y-1">
+              <div className="flex justify-between">
+                <span className="text-sm">{competency.name}</span>
+                <span className="text-sm">{competency.percentage}%</span>
+              </div>
+              <Progress 
+                value={competency.percentage} 
+                className={`h-2 bg-gray-200 ${getProgressColorClass(competency.color)}`}
+              />
             </div>
-            <Progress 
-              value={competency.percentage} 
-              className="h-2 bg-gray-200" 
-              indicatorClassName={`bg-${competency.color}`}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
