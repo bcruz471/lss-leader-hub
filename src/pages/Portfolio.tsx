@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import AppLayout from '../components/layout/AppLayout';
 import { fullPortfolioData } from '../data/mockData';
 import { PortfolioItem } from '../types';
-import { FolderOpen, File, Download, FilePresentation, FileText, Compass, Filter } from 'lucide-react';
+import { FolderOpen, File, Download, Presentation, FileText, Compass, Filter } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 
 const typeIcons = {
   "document": <FileText className="h-10 w-10 text-lss-blue" />,
-  "presentation": <FilePresentation className="h-10 w-10 text-lss-orange" />,
+  "presentation": <Presentation className="h-10 w-10 text-lss-orange" />,
   "project": <Compass className="h-10 w-10 text-lss-teal" />,
   "artifact": <File className="h-10 w-10 text-lss-purple" />,
   "reflection": <File className="h-10 w-10 text-lss-navy" />,

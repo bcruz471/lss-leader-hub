@@ -17,7 +17,7 @@ export interface Recommendation {
   description: string;
   type: RecommendationType;
   color: string;
-  icon: string;
+  icon: "lightbulb" | "book" | "check" | "file" | string;
 }
 
 export interface Assessment {
