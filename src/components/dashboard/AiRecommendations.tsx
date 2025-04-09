@@ -1,15 +1,7 @@
 
 import React from 'react';
-import { Lightbulb, LightbulbOff, CheckCircle, BookOpen, FileText } from 'lucide-react';
-
-interface Recommendation {
-  id: string;
-  title: string;
-  description: string;
-  type: 'course' | 'article' | 'video' | 'assessment';
-  color: string;
-  icon: 'lightbulb' | 'check' | 'book' | 'file';
-}
+import { Lightbulb, CheckCircle, BookOpen, FileText } from 'lucide-react';
+import { Recommendation } from '../../types';
 
 interface AiRecommendationsProps {
   recommendations: Recommendation[];

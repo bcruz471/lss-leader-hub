@@ -1,14 +1,7 @@
 
 import React from 'react';
-import { FolderOpen, FileText, Image, File } from 'lucide-react';
-
-interface PortfolioItem {
-  id: string;
-  title: string;
-  type: 'document' | 'image' | 'presentation' | 'other';
-  date: string;
-  thumbnail?: string;
-}
+import { FolderOpen, FileText, Image, File, Presentation, Compass } from 'lucide-react';
+import { PortfolioItem } from '../../types';
 
 interface DigitalPortfolioProps {
   items: PortfolioItem[];
@@ -23,7 +16,13 @@ export const DigitalPortfolio: React.FC<DigitalPortfolioProps> = ({ items }) => 
       case 'image':
         return <Image className="h-6 w-6 text-lss-purple" />;
       case 'presentation':
-        return <File className="h-6 w-6 text-lss-orange" />;
+        return <Presentation className="h-6 w-6 text-lss-orange" />;
+      case 'project':
+        return <Compass className="h-6 w-6 text-lss-teal" />;
+      case 'artifact':
+        return <File className="h-6 w-6 text-lss-navy" />;
+      case 'reflection':
+        return <File className="h-6 w-6 text-lss-purple" />;
       default:
         return <File className="h-6 w-6 text-gray-500" />;
     }
@@ -46,19 +45,12 @@ export const DigitalPortfolio: React.FC<DigitalPortfolioProps> = ({ items }) => 
             className="p-4 border border-gray-100 rounded-lg transition-all hover:shadow-md cursor-pointer flex gap-4 items-center"
           >
             <div className="bg-gray-100 h-16 w-16 flex items-center justify-center rounded-md">
-              {item.thumbnail ? (
-                <img 
-                  src={item.thumbnail} 
-                  alt={item.title} 
-                  className="h-full w-full object-cover rounded-md"
-                />
-              ) : (
-                renderItemIcon(item.type)
-              )}
+              {renderItemIcon(item.type)}
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">{item.title}</h3>
               <p className="text-sm text-gray-500 mt-1">{item.date}</p>
+              {item.competency && <p className="text-xs mt-1 text-gray-500">{item.competency}</p>}
             </div>
           </div>
         ))}

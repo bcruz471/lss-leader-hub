@@ -1,13 +1,7 @@
 
 import React from 'react';
-import { FileCheck, FileX, Clock } from 'lucide-react';
-
-interface Assessment {
-  id: string;
-  title: string;
-  status: 'complete' | 'incomplete' | 'pending';
-  dueDate?: string;
-}
+import { FileCheck, FileX, Clock, AlertCircle } from 'lucide-react';
+import { Assessment } from '../../types';
 
 interface PerformanceAssessmentProps {
   assessments: Assessment[];
@@ -29,8 +23,18 @@ export const PerformanceAssessment: React.FC<PerformanceAssessmentProps> = ({ as
         return <div className="bg-amber-500 p-3 rounded-full">
           <Clock className="h-6 w-6 text-white" />
         </div>;
+      case 'not-started':
+        return <div className="bg-gray-400 p-3 rounded-full">
+          <AlertCircle className="h-6 w-6 text-white" />
+        </div>;
+      case 'in-progress':
+        return <div className="bg-blue-500 p-3 rounded-full">
+          <Clock className="h-6 w-6 text-white" />
+        </div>;
       default:
-        return null;
+        return <div className="bg-gray-400 p-3 rounded-full">
+          <AlertCircle className="h-6 w-6 text-white" />
+        </div>;
     }
   };
 
@@ -43,8 +47,12 @@ export const PerformanceAssessment: React.FC<PerformanceAssessmentProps> = ({ as
         return 'Incomplete';
       case 'pending':
         return 'Pending';
+      case 'not-started':
+        return 'Not Started';
+      case 'in-progress':
+        return 'In Progress';
       default:
-        return '';
+        return 'Unknown';
     }
   };
 
@@ -57,8 +65,12 @@ export const PerformanceAssessment: React.FC<PerformanceAssessmentProps> = ({ as
         return 'text-lss-blue';
       case 'pending':
         return 'text-amber-600';
+      case 'not-started':
+        return 'text-gray-600';
+      case 'in-progress':
+        return 'text-blue-600';
       default:
-        return '';
+        return 'text-gray-600';
     }
   };
 
