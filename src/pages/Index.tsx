@@ -1,13 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import AppLayout from '../components/layout/AppLayout';
+import CompetencyAssessment from '../components/dashboard/CompetencyAssessment';
+import AiRecommendations from '../components/dashboard/AiRecommendations';
+import PerformanceAssessment from '../components/dashboard/PerformanceAssessment';
+import DigitalPortfolio from '../components/dashboard/DigitalPortfolio';
+import { competencyData, recommendationData, assessmentData, portfolioData } from '../data/mockData';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <AppLayout title="Leading for Student Success (LSS) Program">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CompetencyAssessment 
+          competencies={competencyData.competencies}
+          overallProgress={competencyData.overallProgress}
+        />
+        
+        <AiRecommendations 
+          recommendations={recommendationData.recommendations}
+        />
+
+        <PerformanceAssessment 
+          assessments={assessmentData.assessments}
+        />
+        
+        <DigitalPortfolio 
+          items={portfolioData.items}
+        />
       </div>
-    </div>
+    </AppLayout>
   );
 };
 
