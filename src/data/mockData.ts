@@ -75,52 +75,72 @@ export const coursesData = {
   courses: [
     {
       id: "course1",
-      title: "Instructional Leadership Foundations",
-      description: "Learn the fundamentals of instructional leadership in educational settings.",
+      title: "Visionary Leadership for Student-Centered Systems",
+      description: "Learn how to craft and communicate a compelling district-wide vision that prioritizes equity, academic excellence, and community engagement.",
       progress: 75,
       tags: ["Required", "Asynchronous"],
       category: "Leadership",
-      competency: "Instructional Leadership",
+      competency: "Vision & Values",
       imageUrl: "/placeholder.svg"
     },
     {
       id: "course2",
-      title: "Data-Driven Decision Making",
-      description: "Learn how to use data to make better decisions in your school.",
+      title: "Strategic Governance and Board Relations",
+      description: "Understand the dynamics of working with school boards, managing governance structures, and maintaining focus on long-term student outcomes.",
       progress: 30,
-      tags: ["Elective", "Asynchronous"],
-      category: "Analysis",
-      competency: "Decision-Making",
+      tags: ["Required", "Live Sessions"],
+      category: "Governance",
+      competency: "Systems Leadership",
       imageUrl: "/placeholder.svg"
     },
     {
       id: "course3",
-      title: "Effective Communication for Leaders",
-      description: "Develop skills for clear and impactful communication as a leader.",
+      title: "Data-Driven Instructional Leadership",
+      description: "Use evidence and analytics to drive instructional decision-making and improve teaching and learning district-wide.",
       progress: 0,
-      tags: ["Required", "Live Sessions"],
-      category: "Communication",
-      competency: "Communication",
+      tags: ["Required", "Asynchronous"],
+      category: "Instruction",
+      competency: "Decision-Making",
       imageUrl: "/placeholder.svg"
     },
     {
       id: "course4",
-      title: "Building Culturally Responsive Schools",
-      description: "Learn strategies to create culturally responsive environments.",
+      title: "Leading Equitable and Inclusive School Communities",
+      description: "Explore frameworks and strategies for closing opportunity gaps and building inclusive environments where all students thrive.",
       progress: 90,
-      tags: ["Required", "Self-Paced"],
+      tags: ["Elective", "Self-Paced"],
       category: "Equity",
       competency: "Instructional Leadership",
       imageUrl: "/placeholder.svg"
     },
     {
       id: "course5",
-      title: "Leading Through Change",
-      description: "Strategies for managing and leading through organizational change.",
+      title: "Crisis Leadership and Communication",
+      description: "Prepare to lead through uncertainty, with practical approaches to crisis communication, staff mobilization, and decision-making under pressure.",
       progress: 45,
       tags: ["Elective", "Live Sessions"],
+      category: "Communication",
+      competency: "Communication",
+      imageUrl: "/placeholder.svg"
+    },
+    {
+      id: "course6",
+      title: "Systems Thinking and Organizational Change",
+      description: "Apply systems thinking to design sustainable improvements across departments and teams, from HR to curriculum to operations.",
+      progress: 10,
+      tags: ["Required", "Asynchronous"],
       category: "Leadership",
-      competency: "Decision-Making",
+      competency: "Systems Leadership",
+      imageUrl: "/placeholder.svg"
+    },
+    {
+      id: "course7",
+      title: "Superintendent Finance & Resource Stewardship",
+      description: "Gain a foundational understanding of district budgeting, LCAP alignment, and multi-year financial planning as a superintendent.",
+      progress: 5,
+      tags: ["Required", "Asynchronous"],
+      category: "Finance",
+      competency: "Resource Management",
       imageUrl: "/placeholder.svg"
     }
   ] as Course[]

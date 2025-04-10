@@ -6,7 +6,14 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../compone
 import { Button } from '../components/ui/button';
 import { coursesData } from '../data/mockData';
 import { Course } from '../types';
-import { BookOpen, Filter } from 'lucide-react';
+import { BookOpen, Filter, Info } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from '@/components/ui/badge';
 
 const Courses = () => {
   const [filter, setFilter] = useState<string>('all');
@@ -26,6 +33,10 @@ const Courses = () => {
     return true;
   });
 
+  // Group courses by type (Required vs Elective)
+  const requiredCourses = filteredCourses.filter(course => course.tags.includes('Required'));
+  const electiveCourses = filteredCourses.filter(course => course.tags.includes('Elective'));
+
   return (
     <AppLayout title="Courses">
       <div className="grid gap-6">
@@ -33,7 +44,7 @@ const Courses = () => {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <BookOpen className="h-6 w-6 text-lss-navy" />
-              Available Courses
+              Superintendent Readiness Courses
             </h2>
             <div className="flex gap-4">
               <div className="flex items-center gap-2">
@@ -68,38 +79,121 @@ const Courses = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
+          {requiredCourses.length > 0 && (
+            <>
+              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Required Courses</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {requiredCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            </>
+          )}
+          
+          {electiveCourses.length > 0 && (
+            <>
+              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Elective Courses</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {electiveCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            </>
+          )}
+          
+          {filteredCourses.length === 0 && (
+            <div className="text-center py-10">
+              <p className="text-gray-500">No courses match your filter criteria.</p>
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  setFilter('all');
+                  setCategoryFilter('all');
+                }}
+                className="mt-4"
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </AppLayout>
   );
 };
 
-const CourseCard = ({ course }: { course: Course }) => {
-  const getProgressColor = (progress: number) => {
-    if (progress < 25) return 'bg-gray-300';
-    if (progress < 50) return 'bg-lss-blue';
-    if (progress < 75) return 'bg-lss-teal';
-    return 'bg-lss-orange';
-  };
+// Map course to appropriate visual styling
+const getCourseColorScheme = (course: Course) => {
+  const competency = course.competency;
+  
+  if (competency === 'Vision & Values') {
+    return 'from-blue-600 to-blue-400';
+  } else if (competency === 'Systems Leadership') {
+    return 'from-purple-600 to-purple-400';
+  } else if (competency === 'Decision-Making') {
+    return 'from-sky-600 to-sky-400';
+  } else if (competency === 'Instructional Leadership') {
+    return 'from-amber-500 to-amber-400';
+  } else if (competency === 'Communication') {
+    return 'from-red-600 to-red-400';
+  } else if (competency === 'Resource Management') {
+    return 'from-gray-700 to-gray-500';
+  }
+  
+  return 'from-lss-navy to-lss-blue';
+};
 
+// Map tag types to tooltips
+const getTagTooltip = (tag: string) => {
+  if (tag === 'Asynchronous') {
+    return 'Complete at your own pace with video lessons, readings, and assignments';
+  } else if (tag === 'Live Sessions') {
+    return 'Includes scheduled virtual meetings with facilitators and cohort members';
+  } else if (tag === 'Self-Paced') {
+    return 'Entirely self-guided with no deadlines; complete as needed';
+  } else if (tag === 'Required') {
+    return 'Mandatory for program completion';
+  } else if (tag === 'Elective') {
+    return 'Optional course based on your interests and goals';
+  }
+  return '';
+};
+
+const CourseCard = ({ course }: { course: Course }) => {
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow">
-      <div className="h-32 bg-gradient-to-r from-lss-navy to-lss-blue flex items-center justify-center p-4">
+      <div className={`h-32 bg-gradient-to-r ${getCourseColorScheme(course)} flex items-center justify-center p-4`}>
         <h3 className="text-lg font-bold text-white text-center">{course.title}</h3>
       </div>
       
       <CardHeader className="pb-2">
         <div className="flex flex-wrap gap-2">
-          {course.tags.map((tag, index) => (
-            <span key={index} className="inline-block bg-lss-purple/20 text-lss-purple text-xs rounded-full px-2 py-1">
-              {tag}
-            </span>
-          ))}
+          <TooltipProvider>
+            {course.tags.map((tag, index) => (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
+                  <Badge 
+                    variant="outline" 
+                    className={`
+                      inline-flex items-center gap-1 border 
+                      ${tag === 'Required' ? 'bg-blue-100 text-blue-700 border-blue-200' : 
+                        tag === 'Elective' ? 'bg-purple-100 text-purple-700 border-purple-200' : 
+                        'bg-gray-100 text-gray-700 border-gray-200'}
+                    `}
+                  >
+                    {tag}
+                    <Info className="h-3 w-3" />
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{getTagTooltip(tag)}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
+          <Badge className="bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-100">
+            {course.competency}
+          </Badge>
         </div>
       </CardHeader>
       
@@ -110,7 +204,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             <span>Progress</span>
             <span>{course.progress}%</span>
           </div>
-          <Progress value={course.progress} className="h-2" />
+          <Progress value={course.progress} className={`h-2 ${course.progress > 0 ? 'bg-lss-blue' : 'bg-gray-200'}`} />
         </div>
       </CardContent>
       
