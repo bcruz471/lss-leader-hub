@@ -266,10 +266,10 @@ const ModuleDetail = () => {
           <Progress value={calculateCompletionPercentage()} className="h-2" />
         </div>
 
-        {/* Main Content with Sidebar - Modified to fix alignment */}
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar Navigation - Changed position to align with content */}
-          <div className="md:w-64 bg-white rounded-lg shadow-sm p-2 h-fit sticky top-6 self-start">
+        {/* Completely restructured layout to fix the overlap */}
+        <div className="grid md:grid-cols-[250px,1fr] gap-6">
+          {/* Sidebar Navigation - Fixed position and width */}
+          <div className="bg-white rounded-lg shadow-sm p-2 h-fit sticky top-6">
             <Tabs 
               value={activeTab} 
               onValueChange={setActiveTab}
@@ -312,7 +312,7 @@ const ModuleDetail = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex-1">
+          <div>
             {activeTab === 'overview' && renderOverview()}
             {activeTab === 'activities' && renderActivities()}
             {activeTab === 'reflection' && renderReflection()}
