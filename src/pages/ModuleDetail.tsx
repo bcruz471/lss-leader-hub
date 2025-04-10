@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
@@ -47,7 +46,7 @@ const ModuleDetail = () => {
     <div className="space-y-6">
       <div className="p-6 bg-white rounded-lg shadow-sm">
         <h3 className="text-xl font-semibold text-lss-navy mb-4">Learning Objectives</h3>
-        <ul className="space-y-2">
+        <ul className="list-decimal list-inside space-y-2 hidden">
           {moduleData.overview.objectives.map((objective, index) => (
             <li key={index} className="flex items-start gap-2">
               <span className="bg-lss-blue text-white flex items-center justify-center rounded-full w-6 h-6 mt-0.5 text-sm flex-shrink-0">
@@ -277,7 +276,7 @@ const ModuleDetail = () => {
               orientation="vertical"
               className="w-full"
             >
-              <TabsList className="flex flex-col w-full bg-transparent space-y-1">
+              <TabsList className="flex flex-col w-full bg-transparent space-y-1 items-stretch h-full">
                 <TabsTrigger 
                   value="overview"
                   className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"

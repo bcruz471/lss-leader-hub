@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, BookOpen, FileCheck, FolderOpen } from 'lucide-react';
@@ -9,7 +8,7 @@ export const AppSidebar = () => {
       {/* Logo */}
       <div className="p-4 flex justify-center items-center">
         <img 
-          src="/lovable-uploads/b200cdf1-f2f0-4b57-bdd8-853cf0bc6b1f.png" 
+          src="/public/logo.png"
           alt="Think Together Logo" 
           className="w-full max-w-[200px]" 
         />
