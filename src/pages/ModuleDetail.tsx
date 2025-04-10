@@ -266,10 +266,10 @@ const ModuleDetail = () => {
           <Progress value={calculateCompletionPercentage()} className="h-2" />
         </div>
 
-        {/* Main Content with Sidebar */}
+        {/* Main Content with Sidebar - Modified to fix alignment */}
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar Navigation */}
-          <div className="md:w-64 bg-white rounded-lg shadow-sm p-2 h-fit sticky top-6">
+          {/* Sidebar Navigation - Changed position to align with content */}
+          <div className="md:w-64 bg-white rounded-lg shadow-sm p-2 h-fit sticky top-6 self-start">
             <Tabs 
               value={activeTab} 
               onValueChange={setActiveTab}
