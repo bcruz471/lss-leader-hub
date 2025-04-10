@@ -253,9 +253,10 @@ const ModuleDetail = () => {
 
   return (
     <AppLayout title="Module Detail">
-      <div className="grid gap-6">
-        {/* Header Section */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+      {/* Main container with padding to ensure proper spacing */}
+      <div className="container mx-auto py-6">
+        {/* Header Section with full width */}
+        <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
           <h1 className="text-2xl font-bold text-lss-navy">{moduleData.title}</h1>
           <p className="text-gray-600 mb-4">Competency: {moduleData.competency}</p>
           
@@ -266,10 +267,10 @@ const ModuleDetail = () => {
           <Progress value={calculateCompletionPercentage()} className="h-2" />
         </div>
 
-        {/* Completely restructured layout to fix the overlap */}
-        <div className="grid md:grid-cols-[250px,1fr] gap-6">
-          {/* Sidebar Navigation - Fixed position and width */}
-          <div className="bg-white rounded-lg shadow-sm p-2 h-fit sticky top-6">
+        {/* Content area with grid layout for clear separation */}
+        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6">
+          {/* Sidebar Navigation - Fixed width column */}
+          <div className="bg-white rounded-lg shadow-sm p-4 h-fit sticky top-24">
             <Tabs 
               value={activeTab} 
               onValueChange={setActiveTab}
@@ -311,8 +312,8 @@ const ModuleDetail = () => {
             </Tabs>
           </div>
 
-          {/* Main Content Area */}
-          <div>
+          {/* Main Content Area - Takes remaining space */}
+          <div className="bg-transparent">
             {activeTab === 'overview' && renderOverview()}
             {activeTab === 'activities' && renderActivities()}
             {activeTab === 'reflection' && renderReflection()}
