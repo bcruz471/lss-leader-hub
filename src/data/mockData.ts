@@ -1,4 +1,3 @@
-
 // Mock data for our components
 import { Assessment, Competency, CompetencyData, Course, PortfolioItem, Recommendation } from "../types";
 
@@ -207,4 +206,131 @@ export const fullPortfolioData = {
       competency: "Decision-Making"
     }
   ] as PortfolioItem[]
+};
+
+// Module data for the module detail page
+export const moduleData = {
+  id: "module1",
+  title: "Visionary Leadership for Student-Centered Systems",
+  competency: "Vision & Values",
+  progress: 65,
+  estimatedTime: "4 hours",
+  overview: {
+    description: "This module helps you develop and articulate a clear, compelling vision for student success that can guide your entire district. Learn to align systems, resources, and stakeholders around shared educational goals.",
+    objectives: [
+      "Develop a student-centered vision that prioritizes equity and excellence",
+      "Align district systems and resources with your vision",
+      "Build stakeholder buy-in and community engagement",
+      "Measure progress toward vision implementation"
+    ],
+    importance: "As a superintendent, your vision sets the direction for the entire district. This module provides research-backed frameworks to ensure your vision resonates with stakeholders and leads to meaningful student outcomes."
+  },
+  activities: [
+    {
+      id: "act1",
+      title: "Understanding Vision vs. Mission",
+      type: "video",
+      duration: "15 minutes",
+      completed: true,
+      content: "In this video, Dr. Maria Hernandez explains the critical difference between organizational vision and mission statements, with examples from high-performing school districts."
+    },
+    {
+      id: "act2",
+      title: "Equity-Centered Vision Framework",
+      type: "slides",
+      duration: "25 minutes",
+      completed: true,
+      content: "This presentation walks through the five components of an equity-centered vision, with real-world examples from California districts that have successfully implemented transformative change."
+    },
+    {
+      id: "act3",
+      title: "Stakeholder Engagement Strategies",
+      type: "text",
+      duration: "20 minutes",
+      completed: false,
+      content: "Learn practical approaches to engaging diverse stakeholders in vision development and implementation. This reading covers techniques for building authentic community partnerships that sustain vision work."
+    },
+    {
+      id: "act4",
+      title: "Vision Implementation Case Study",
+      type: "video",
+      duration: "30 minutes",
+      completed: false,
+      content: "Superintendent Dr. James Williams shares how his district translated vision into action through strategic planning, resource alignment, and continuous improvement cycles."
+    }
+  ],
+  reflectionPrompts: [
+    "What aspects of your district's current vision are most compelling to stakeholders? Which elements need strengthening?",
+    "How would you assess your district's alignment between stated vision and actual resource allocation?",
+    "What barriers exist to implementing your vision, and how might you address them?",
+    "How will you know if your vision is making a difference for students? What evidence would you look for?"
+  ],
+  assessment: {
+    questions: [
+      {
+        id: "q1",
+        question: "Which of the following is NOT typically part of an effective district vision?",
+        options: [
+          "Aspirational goals for student outcomes",
+          "Detailed operational procedures",
+          "Core values that guide decision-making",
+          "A focus on equity and excellence"
+        ],
+        correctAnswer: 1
+      },
+      {
+        id: "q2",
+        question: "A superintendent is analyzing district data and finds that the vision statement doesn't align with current resource allocation. The BEST next step would be to:",
+        options: [
+          "Immediately change the vision to match current spending",
+          "Conduct a root cause analysis of the misalignment",
+          "Ignore the discrepancy since budgets are separate from vision",
+          "Ask the board to create a new vision statement"
+        ],
+        correctAnswer: 1
+      },
+      {
+        id: "q3",
+        question: "When developing a district vision, which stakeholder group should be engaged FIRST?",
+        options: [
+          "School board members only",
+          "Administrative cabinet only",
+          "Teachers and staff only",
+          "Representatives from multiple stakeholder groups"
+        ],
+        correctAnswer: 3
+      }
+    ],
+    mastery: 33
+  },
+  resources: [
+    {
+      id: "res1",
+      title: "Vision Communication Toolkit",
+      type: "pdf",
+      description: "Templates and examples for communicating your vision to different stakeholder groups",
+      downloadUrl: "#"
+    },
+    {
+      id: "res2",
+      title: "Measuring Vision Impact - Research Brief",
+      type: "pdf",
+      description: "Research-based indicators for measuring the impact of your vision on student outcomes",
+      downloadUrl: "#"
+    },
+    {
+      id: "res3",
+      title: "EdSource: Leading with Vision",
+      type: "link",
+      description: "Case studies of California superintendents who have successfully implemented transformative visions",
+      url: "https://edsource.org"
+    },
+    {
+      id: "res4",
+      title: "Vision to Action: Strategic Planning Guide",
+      type: "doc",
+      description: "Step-by-step guide to translating vision into actionable strategic plans",
+      downloadUrl: "#"
+    }
+  ]
 };

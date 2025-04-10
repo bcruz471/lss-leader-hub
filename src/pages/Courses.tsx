@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
 import { Progress } from '../components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
@@ -33,7 +33,6 @@ const Courses = () => {
     return true;
   });
 
-  // Group courses by type (Required vs Elective)
   const requiredCourses = filteredCourses.filter(course => course.tags.includes('Required'));
   const electiveCourses = filteredCourses.filter(course => course.tags.includes('Elective'));
 
@@ -122,7 +121,6 @@ const Courses = () => {
   );
 };
 
-// Map course to appropriate visual styling
 const getCourseColorScheme = (course: Course) => {
   const competency = course.competency;
   
@@ -143,7 +141,6 @@ const getCourseColorScheme = (course: Course) => {
   return 'from-lss-navy to-lss-blue';
 };
 
-// Map tag types to tooltips
 const getTagTooltip = (tag: string) => {
   if (tag === 'Asynchronous') {
     return 'Complete at your own pace with video lessons, readings, and assignments';
@@ -209,7 +206,11 @@ const CourseCard = ({ course }: { course: Course }) => {
       </CardContent>
       
       <CardFooter>
-        <Button className="w-full bg-lss-navy hover:bg-lss-navy/90">Continue Learning</Button>
+        <Link to={`/modules/module1`} className="w-full">
+          <Button className="w-full bg-lss-navy hover:bg-lss-navy/90">
+            Continue Learning
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

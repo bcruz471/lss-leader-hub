@@ -51,3 +51,49 @@ export interface Course {
   competency: string;
   imageUrl?: string;
 }
+
+// New types for module detail page
+export interface ModuleActivity {
+  id: string;
+  title: string;
+  type: "video" | "text" | "slides";
+  duration: string;
+  completed: boolean;
+  content: string;
+}
+
+export interface ModuleAssessmentQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+}
+
+export interface ModuleResource {
+  id: string;
+  title: string;
+  type: "pdf" | "doc" | "link";
+  description: string;
+  downloadUrl?: string;
+  url?: string;
+}
+
+export interface Module {
+  id: string;
+  title: string;
+  competency: string;
+  progress: number;
+  estimatedTime: string;
+  overview: {
+    description: string;
+    objectives: string[];
+    importance: string;
+  };
+  activities: ModuleActivity[];
+  reflectionPrompts: string[];
+  assessment: {
+    questions: ModuleAssessmentQuestion[];
+    mastery: number;
+  };
+  resources: ModuleResource[];
+}
