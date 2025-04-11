@@ -252,10 +252,8 @@ const ModuleDetail = () => {
 
   return (
     <AppLayout title="Module Detail">
-      {/* Main container with padding to ensure proper spacing */}
-      <div className="container mx-auto py-6">
-        {/* Header Section with full width */}
-        <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
+      <div className="container mx-auto py-8">
+        <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
           <h1 className="text-2xl font-bold text-lss-navy">{moduleData.title}</h1>
           <p className="text-gray-600 mb-4">Competency: {moduleData.competency}</p>
           
@@ -266,53 +264,52 @@ const ModuleDetail = () => {
           <Progress value={calculateCompletionPercentage()} className="h-2" />
         </div>
 
-        {/* Content area with grid layout for clear separation */}
-        <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6">
-          {/* Sidebar Navigation - Fixed width column */}
-          <div className="bg-white rounded-lg shadow-sm p-4 h-fit sticky top-24">
-            <Tabs 
-              value={activeTab} 
-              onValueChange={setActiveTab}
-              orientation="vertical"
-              className="w-full"
-            >
-              <TabsList className="flex flex-col w-full bg-transparent space-y-1 items-stretch h-full">
-                <TabsTrigger 
-                  value="overview"
-                  className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
-                >
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="activities"
-                  className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
-                >
-                  Learning Activities
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="reflection"
-                  className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
-                >
-                  Reflection
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="assessment"
-                  className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
-                >
-                  Assessment
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="resources"
-                  className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
-                >
-                  Resources
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="w-full md:w-64 flex-shrink-0">
+            <div className="bg-white rounded-lg shadow-sm p-4 sticky top-24">
+              <Tabs 
+                value={activeTab} 
+                onValueChange={setActiveTab}
+                orientation="vertical"
+                className="w-full"
+              >
+                <TabsList className="flex flex-col w-full bg-transparent space-y-1 items-stretch h-full">
+                  <TabsTrigger 
+                    value="overview"
+                    className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
+                  >
+                    Overview
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="activities"
+                    className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
+                  >
+                    Learning Activities
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="reflection"
+                    className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
+                  >
+                    Reflection
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="assessment"
+                    className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
+                  >
+                    Assessment
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="resources"
+                    className="w-full justify-start text-left px-4 py-2 data-[state=active]:bg-blue-50 data-[state=active]:text-lss-navy"
+                  >
+                    Resources
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
           </div>
 
-          {/* Main Content Area - Takes remaining space */}
-          <div className="bg-transparent">
+          <div className="flex-1">
             {activeTab === 'overview' && renderOverview()}
             {activeTab === 'activities' && renderActivities()}
             {activeTab === 'reflection' && renderReflection()}
