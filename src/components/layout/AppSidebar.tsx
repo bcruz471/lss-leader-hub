@@ -41,7 +41,7 @@ export const AppSidebar = () => {
               className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-lss-navy"
             >
               <FileCheck className="mr-3 h-5 w-5" />
-              Assessments
+              Performance Assessment
             </Link>
           </li>
           <li>
@@ -50,7 +50,7 @@ export const AppSidebar = () => {
               className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-lss-navy"
             >
               <FolderOpen className="mr-3 h-5 w-5" />
-              Portfolio
+              Digital Portfolio
             </Link>
           </li>
         </ul>

@@ -4,7 +4,6 @@ import AppLayout from '../components/layout/AppLayout';
 import { Progress } from '../components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
-import { coursesData } from '../data/mockData';
 import { Course } from '../types';
 import { BookOpen, Filter, Info } from 'lucide-react';
 import {
@@ -14,27 +13,28 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from '@/components/ui/badge';
+import { modules } from '../data/modules';
 
 const Courses = () => {
   const [filter, setFilter] = useState<string>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
-  
-  const categories = ['all', ...new Set(coursesData.courses.map(course => course.category))];
-  const competencies = ['all', ...new Set(coursesData.courses.map(course => course.competency))];
-  
-  const filteredCourses = coursesData.courses.filter(course => {
+
+  const categories = ['all', ...new Set(modules.map(module => module.competency))];
+  const competencies = ['all', ...new Set(modules.map(module => module.competency))];
+
+  const filteredModules = modules.filter(module => {
     if (filter !== 'all' && categoryFilter !== 'all') {
-      return course.competency === filter && course.category === categoryFilter;
+      return module.competency === filter && module.competency === categoryFilter;
     } else if (filter !== 'all') {
-      return course.competency === filter;
+      return module.competency === filter;
     } else if (categoryFilter !== 'all') {
-      return course.category === categoryFilter;
+      return module.competency === categoryFilter;
     }
     return true;
   });
 
-  const requiredCourses = filteredCourses.filter(course => course.tags.includes('Required'));
-  const electiveCourses = filteredCourses.filter(course => course.tags.includes('Elective'));
+  const requiredModules = filteredModules.filter(module => module.tags.includes('Required'));
+  const electiveModules = filteredModules.filter(module => module.tags.includes('Elective'));
 
   return (
     <AppLayout title="Courses">
@@ -53,8 +53,8 @@ const Courses = () => {
                   onChange={(e) => setFilter(e.target.value)}
                   className="border border-gray-300 rounded-md p-1 text-sm"
                 >
-                  {competencies.map(comp => (
-                    <option key={comp} value={comp}>
+                  {competencies.map((comp, index) => (
+                    <option key={index} value={comp}>
                       {comp === 'all' ? 'All Competencies' : comp}
                     </option>
                   ))}
@@ -68,8 +68,8 @@ const Courses = () => {
                   onChange={(e) => setCategoryFilter(e.target.value)}
                   className="border border-gray-300 rounded-md p-1 text-sm"
                 >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>
+                  {categories.map((cat, index) => (
+                    <option key={index} value={cat}>
                       {cat === 'all' ? 'All Categories' : cat}
                     </option>
                   ))}
@@ -78,31 +78,31 @@ const Courses = () => {
             </div>
           </div>
           
-          {requiredCourses.length > 0 && (
+          {requiredModules.length > 0 && (
             <>
-              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Required Courses</h3>
+              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Required Modules</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {requiredCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
+                {requiredModules.map((module) => (
+                  <CourseCard key={module.id} course={module} />
                 ))}
               </div>
             </>
           )}
           
-          {electiveCourses.length > 0 && (
+          {electiveModules.length > 0 && (
             <>
-              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Elective Courses</h3>
+              <h3 className="text-lg font-semibold mb-4 text-lss-navy border-b pb-2">Elective Modules</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {electiveCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
+                {electiveModules.map((module) => (
+                  <CourseCard key={module.id} course={module} />
                 ))}
               </div>
             </>
           )}
           
-          {filteredCourses.length === 0 && (
+          {filteredModules.length === 0 && (
             <div className="text-center py-10">
-              <p className="text-gray-500">No courses match your filter criteria.</p>
+              <p className="text-gray-500">No modules match your filter criteria.</p>
               <Button 
                 variant="outline" 
                 onClick={() => {
@@ -206,7 +206,7 @@ const CourseCard = ({ course }: { course: Course }) => {
       </CardContent>
       
       <CardFooter>
-        <Link to={`/modules/module1`} className="w-full">
+        <Link to={`/modules/${course.id}`} className="w-full">
           <Button className="w-full bg-lss-navy hover:bg-lss-navy/90">
             Continue Learning
           </Button>

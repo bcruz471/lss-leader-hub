@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import AppLayout from '../components/layout/AppLayout';
-import { fullAssessmentsData } from '../data/mockData';
+import { mockData as fullAssessmentsData } from '../data/modules';
 import { Assessment } from '../types';
 import { FileCheck, Clock, CheckCircle, AlertCircle, FileText, FilePen, ArrowUpDown } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';

@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import AppLayout from '../components/layout/AppLayout';
-import { fullPortfolioData } from '../data/mockData';
+import { mockData as fullPortfolioData } from '../data/modules';
 import { PortfolioItem } from '../types';
 import { FolderOpen, File, Download, Presentation, FileText, Compass, Filter } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../components/ui/card';
@@ -20,11 +19,12 @@ const typeIcons = {
 const Portfolio = () => {
   const [competencyFilter, setCompetencyFilter] = useState<string>('all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
-  
-  const portfolioItems = fullPortfolioData.items;
+
+  // Ensure fullPortfolioData.items exists and is typed correctly
+  const portfolioItems: PortfolioItem[] = (fullPortfolioData as any).items || [];
   const competencies = ['all', ...new Set(portfolioItems.map(item => item.competency).filter(Boolean) as string[])];
   const types = ['all', ...new Set(portfolioItems.map(item => item.type))];
-  
+
   const filteredItems = portfolioItems.filter(item => {
     if (competencyFilter !== 'all' && typeFilter !== 'all') {
       return item.competency === competencyFilter && item.type === typeFilter;
@@ -69,8 +69,8 @@ const Portfolio = () => {
                   className="border border-gray-300 rounded-md p-2 text-sm"
                 >
                   {types.map(type => (
-                    <option key={type} value={type}>
-                      {type === 'all' ? 'All Types' : type.charAt(0).toUpperCase() + type.slice(1)}
+                    <option key={type as string} value={type as string}>
+                      {type === 'all' ? 'All Types' : (type as string).charAt(0).toUpperCase() + (type as string).slice(1)}
                     </option>
                   ))}
                 </select>
@@ -91,7 +91,7 @@ const Portfolio = () => {
 
 const PortfolioCard = ({ item }: { item: PortfolioItem }) => {
   const icon = typeIcons[item.type] || <File className="h-10 w-10 text-gray-500" />;
-  
+
   const getCompetencyColor = (competency?: string) => {
     switch(competency) {
       case 'Instructional Leadership': return 'bg-lss-blue text-white';
